@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css'
 
 class App extends React.Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class App extends React.Component {
 
   addItem(){
     const newItem={
-      id: 1 + Math.random(),
+      id: Math.random(),
       value: this.state.newItem.slice()
     };
 
@@ -44,18 +45,22 @@ class App extends React.Component {
     return(
       <div className="App">
         <div>
-          Add Task
+          <div className="Header">Add Task</div>
           <br/>
           <input 
+            maxLength="32"
+            className="TaskBox"
             type="text"
             placeholder="Enter task"
             value={this.state.newItem}
             onChange={e => this.updateInput("newItem", e.target.value)}
           />
           <button
+            className="AddButton"
             onClick={() => this.addItem()}
+            disabled={!this.state.newItem.length}
           >
-            Add
+            ADD
           </button>
           <br/>
           <ul>
@@ -64,6 +69,7 @@ class App extends React.Component {
                 <li key={item.id}>
                   {item.value}
                   <button
+                    className="DeleteButton"
                     onClick={() => this.deleteItem(item.id)}
                     >
                       X
